@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Datafy</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <img src="./assets/logo datafy.svg" alt="logo" />
+      <a href="">Избранное</a>
+      <a href="">Тарифы</a>
+      <a href="">Поддержка</a>
+    </header>
+    <main>
+      <h1>Поиск контрагента</h1>
+      <p class="nav">Главная > Поиск контрагента</p>
+      <div class="search">
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Поиск по БИН/ИИН или фамилии"
+        />
+        <button onclick="handleSearch()">Начать поиск</button>
+        <button onclick="openFilter()">
+          <img src="./assets/filter.svg" alt="filter-photo" />Фильтры
+        </button>
+      </div>
+      <p class="counter">
+        Результаты поиска - <span>0 найденных компаний</span>
+      </p>
+      <div class="filter-wrapper" id="filter">
+        <div class="filter-container">
+          <div class="select">
+            <h2>По городам</h2>
+            <div class="custom-select">
+              <select id="city-select">
+                <option value="0">Выбрать город</option>
+                <option value="темиртау">Темиртау</option>
+                <option value="алматы">Алматы</option>
+                <option value="шымкент">Шымкент</option>
+                <option value="астана">Астана</option>
+                <option value="костанай">Костанай</option>
+                <option value="актобе">Актобе</option>
+                <option value="тараз">Тараз</option>
+              </select>
+            </div>
+          </div>
+          <div class="select">
+            <h2>Тип организации:</h2>
+            <div class="custom-select">
+              <select id="type-select">
+                <option value="0">Выбрать тип организации</option>
+                <option value="ЮЛ">ЮЛ</option>
+                <option value="ФЗ">ФЗ</option>
+                <option value="ИП">ИП</option>
+              </select>
+            </div>
+          </div>
+          <div class="select">
+            <h2>По статусу</h2>
+            <div class="custom-select">
+              <select id="status-select">
+                <option value="0">Выбрать город</option>
+                <option value="Действует">Действует</option>
+                <option value="Бездействует">Бездействует</option>
+              </select>
+            </div>
+          </div>
+          <div class="filter-buttons">
+            <button onclick="closeFilter()">Фильтровать</button>
+            <button onclick="resetFilters()">Сбросить</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-container" id="card-container"></div>
+      <div id="company-details" style="display: none">
+        <h1 id="company-name">Загрузка...</h1>
+        <p class="nav">Главная > Поиск контрагента > Детали компании</p>
+        <h2>Доходы компании</h2>
+        <canvas id="incomeChart" width="600" height="300"></canvas>
+        <button onclick="goBack()">← Назад к списку</button>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-top">
+        <div class="footer-col">
+          <img src="./assets/datafy white logo.svg" alt="" />
+          <p style="color: #9f9f9f; font-size: 14px">
+            Современная платформа для проверки контрагентов с подробной
+            информацией и аналитикой.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h3>Продукты</h3>
+          <div class="footer-links">
+            <p>Проверка контрагентов</p>
+            <p>Выгрузка данных</p>
+            <p>Массовая проверка</p>
+            <p>Зарубежные контрагенты</p>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Компания</h3>
+          <div class="footer-links">
+            <p>О нас</p>
+            <p>Карьера</p>
+            <p>Блог</p>
+            <p>Пресса</p>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Правовая информация</h3>
+          <div class="footer-links">
+            <p>Условия использования</p>
+            <p>Политика конфиденциальности</p>
+            <p>Политика использования файлов cookie</p>
+            <p>Безопасность</p>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Контакты</h3>
+          <p class="contact">
+            <img src="./assets/solar_letter-linear.svg" alt="" /> info@datafy.kz
+          </p>
+          <p class="contact">
+            <img src="./assets/solar_phone-calling-linear.svg" alt="" /> +7
+            (777) 777-77-77
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>2025. Все права защищены.</p>
+        <div class="socials">
+          <a href="#"><img src="./assets/linkedin logo.svg" alt="" /></a>
+          <a href="#"><img src="./assets/facebook logo.svg" alt="" /></a>
+          <a href="#"><img src="./assets/twitter logo.svg" alt="" /></a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>График компании</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <img src="./assets/logo datafy.svg" alt="logo" />
+      <a href="">Избранное</a>
+      <a href="">Тарифы</a>
+      <a href="">Поддержка</a>
+    </header>
+
+    <main>
+      <h1 id="company-name" class="company-name">Загрузка...</h1>
+      <p class="nav">Главная > Поиск контрагента > Детали компании</p>
+      <h2>Доходы компании</h2>
+      <canvas id="incomeChart" width="600" height="300"></canvas>
+    </main>
+    <footer>
+      <div class="footer-top">
+        <div class="footer-col">
+          <img src="./assets/datafy white logo.svg" alt="" />
+          <p style="color: #9f9f9f; font-size: 14px">
+            Современная платформа для проверки контрагентов с подробной
+            информацией и аналитикой.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h3>Продукты</h3>
+          <div class="footer-links">
+            <p>Проверка контрагентов</p>
+            <p>Выгрузка данных</p>
+            <p>Массовая проверка</p>
+            <p>Зарубежные контрагенты</p>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Компания</h3>
+          <div class="footer-links">
+            <p>О нас</p>
+            <p>Карьера</p>
+            <p>Блог</p>
+            <p>Пресса</p>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Правовая информация</h3>
+          <div class="footer-links">
+            <p>Условия использования</p>
+            <p>Политика конфиденциальности</p>
+            <p>Политика использования файлов cookie</p>
+            <p>Безопасность</p>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Контакты</h3>
+          <p class="contact">
+            <img src="./assets/solar_letter-linear.svg" alt="" /> info@datafy.kz
+          </p>
+          <p class="contact">
+            <img src="./assets/solar_phone-calling-linear.svg" alt="" /> +7
+            (777) 777-77-77
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>2025. Все права защищены.</p>
+        <div class="socials">
+          <a href="#"><img src="./assets/linkedin logo.svg" alt="" /></a>
+          <a href="#"><img src="./assets/facebook logo.svg" alt="" /></a>
+          <a href="#"><img src="./assets/twitter logo.svg" alt="" /></a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const bin = params.get("bin");
+
+      fetch("./companies.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const company = data.find((c) => c.bin === bin);
+          if (!company) return;
+
+          document.getElementById("company-name").textContent = company.name;
+
+          const months = [
+            "Янв",
+            "Фев",
+            "Мар",
+            "Апр",
+            "Май",
+            "Июн",
+            "Июл",
+            "Авг",
+            "Сен",
+            "Окт",
+            "Ноя",
+            "Дек",
+          ];
+
+          const income = company.income?.slice(-12) || [];
+
+          const ctx = document.getElementById("incomeChart").getContext("2d");
+          new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: months,
+              datasets: [
+                {
+                  label: "Доходы (тенге)",
+                  data: income,
+                  borderColor: "#4339F2",
+                  backgroundColor: "#4339F255",
+                  fill: true,
+                  tension: 0.2,
+                },
+              ],
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true,
+                },
+              },
+            },
+          });
+        });
+    </script>
+  </body>
+</html>
